@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Week Number</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+	  
+	<div id="week_info"></div>
+	<div id="meeting_info"></div>
+
+  <script>
+      function getWeekNum(d){
+          d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+          d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+          var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+          var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7 );
+          return [d.getUTCFullYear(), weekNo];
+      }
+	  var wee = document.getElementById("week_info");
+	  var mee = document.getElementById("meeting_info");
+	  var res = getWeekNum(new Date());
+	  wee.innerText = "It's week " + res[1] + " of year " + res[0];
+	  if(res[1] % 2 == 0){
+		  mee.innerText = "It's a Group Meeting week!"
+	  } else {
+		  mee.innerText = "It's an Individual Meeting week!"
+	  }
+  </script>
+    
+  </body>
+  
+</html>
